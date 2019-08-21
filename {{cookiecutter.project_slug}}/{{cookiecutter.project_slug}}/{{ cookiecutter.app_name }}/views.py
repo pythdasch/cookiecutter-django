@@ -6,26 +6,26 @@ from django.utils.translation import ugettext_lazy as _
 
 
 
-class {{ cookiecutter.model_name }}DetailView(LoginRequiredMixin, DetailView):
+class {{ cookiecutter.name_of_model }}DetailView(LoginRequiredMixin, DetailView):
 
-    model = {{ cookiecutter.model_name }}
+    model = {{ cookiecutter.name_of_model }}
     slug_field = "slug"
     slug_url_kwarg = "slug"
 
 
-user_detail_view = {{ cookiecutter.model_name }}DetailView.as_view()
+user_detail_view = {{ cookiecutter.name_of_model }}DetailView.as_view()
 
 
-class {{ cookiecutter.model_name }}UpdateView(LoginRequiredMixin, UpdateView):
+class {{ cookiecutter.name_of_model }}UpdateView(LoginRequiredMixin, UpdateView):
 
-    model = {{ cookiecutter.model_name }}
+    model = {{ cookiecutter.name_of_model }}
     fields = ["title", "content"]
 
     def get_success_url(self):
         return reverse("{{ cookiecutter.app_name }}:detail", kwargs={"slug": self.object.pk})
 
     def get_object(self):
-        return {{ cookiecutter.model_name }}.objects.get(slug=self.object.slug)
+        return {{ cookiecutter.name_of_model }}.objects.get(slug=self.object.slug)
 
     def form_valid(self, form):
         messages.add_message(
@@ -34,4 +34,4 @@ class {{ cookiecutter.model_name }}UpdateView(LoginRequiredMixin, UpdateView):
         return super().form_valid(form)
 
 
-{{ cookiecutter.app_name }}_update_view = {{ cookiecutter.model_name }}UpdateView.as_view()
+{{ cookiecutter.app_name }}_update_view = {{ cookiecutter.name_of_model }}UpdateView.as_view()

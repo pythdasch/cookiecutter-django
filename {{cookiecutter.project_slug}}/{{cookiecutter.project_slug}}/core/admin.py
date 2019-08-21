@@ -8,5 +8,5 @@ User = get_user_model()
 
 
 @admin.register(User)
-class {{ cookiecutter.model_name }}Admin(admin.ModelAdmin):
+class {{ cookiecutter.name_of_model }}Admin(admin.ModelAdmin):
     pass
