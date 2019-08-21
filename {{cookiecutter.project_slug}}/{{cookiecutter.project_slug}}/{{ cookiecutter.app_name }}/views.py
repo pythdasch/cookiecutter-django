@@ -3,7 +3,7 @@ from django.urls import reverse
 from django.views.generic import DetailView, RedirectView, UpdateView
 from django.contrib import messages
 from django.utils.translation import ugettext_lazy as _
-
+from {{ cookiecutter.app_name }}.models import {{ cookiecutter.name_of_model }}
 
 
 class {{ cookiecutter.name_of_model }}DetailView(LoginRequiredMixin, DetailView):
@@ -13,7 +13,7 @@ class {{ cookiecutter.name_of_model }}DetailView(LoginRequiredMixin, DetailView
     slug_url_kwarg = "slug"
 
 
-user_detail_view = {{ cookiecutter.name_of_model }}DetailView.as_view()
+{{ cookiecutter.app_name }}_detail_view = {{ cookiecutter.name_of_model }}DetailView.as_view()
 
 
 class {{ cookiecutter.name_of_model }}UpdateView(LoginRequiredMixin, UpdateView):

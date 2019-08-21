@@ -22,13 +22,13 @@ class {{ cookiecutter.name_of_model }}(Location):
         upload_to='projects/cover/',
         blank=True, null=True,
         validators=[validate_image],
-        variations=settings.IMAGE_CONFIG["VARIATIONS_IMAGES"])
+        variations=settings.IMAGE_CONFIG)
     background = StdImageField(
         verbose_name=_("Background"),
         upload_to='projects/background/',
         blank=True, null=True,
         validators=[validate_image],
-        variations=settings.IMAGE_CONFIG["VARIATIONS_IMAGES"])
+        variations=settings.IMAGE_CONFIG)
 
     is_premium = models.BooleanField(default=False)
 
