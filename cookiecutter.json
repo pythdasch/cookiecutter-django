@@ -33,7 +33,7 @@
     "GCP",
     "None"
   ],
-  "custom_bootstrap_compilation": "n",
+  "custom_materialize_compilation": "n",
   "use_compressor": "n",
   "use_celery": "n",
   "use_mailhog": "n",
@@ -43,5 +43,7 @@
   "use_travisci": "n",
   "keep_local_envs_in_vcs": "y",
 
-  "debug": "n"
+  "debug": "n",
+  "name_of_model": "Ads",
+  "app_name": "ads"
 }

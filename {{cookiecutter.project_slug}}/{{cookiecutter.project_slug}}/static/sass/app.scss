@@ -1,8 +1,15 @@
-{% if cookiecutter.custom_bootstrap_compilation == 'y' %}
-@import "custom_bootstrap_vars";
-@import "bootstrap";
-{% endif %}
+// Color
+@import "../vendor/materialize/sass/components/color-variables";
+@import "../vendor/materialize/sass/components/color-classes";
 
+// Variables;
+@import "custom_materialize_vars";
+
+// Reset
+@import "../vendor/materialize/sass/components/normalize";
+
+// ../vendor/materialize/sass/components
+@import "../vendor/materialize/sass/materialize";
 
 
 // project specific CSS goes here

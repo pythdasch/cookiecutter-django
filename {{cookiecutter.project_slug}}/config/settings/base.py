@@ -82,6 +82,7 @@ THIRD_PARTY_APPS = [
 
 LOCAL_APPS = [
     "{{ cookiecutter.project_slug }}.users.apps.UsersConfig",
+    "{{ cookiecutter.project_slug }}.{{ cookiecutter.app_name }}.apps.{{ cookiecutter.model_name }}Config",
     # Your stuff: custom apps go here
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
@@ -250,6 +251,14 @@ LOGGING = {
         }
     },
     "root": {"level": "INFO", "handlers": ["console"]},
+}
+
+IMAGE_CONFIG = {
+    'background': (4000, 2000),
+    'thumbnail': (150, 150, True),
+    'medium': (300, 200),
+    'post': (400, 400, True),
+    'small': (50, 50, True)
 }
 
 {% if cookiecutter.use_celery == 'y' -%}

@@ -9,9 +9,6 @@ const pjson = require('./package.json')
 // Plugins
 const autoprefixer = require('autoprefixer')
 const browserSync = require('browser-sync').create()
-{% if cookiecutter.custom_bootstrap_compilation == 'y' %}
-const concat = require('gulp-concat')
-{% endif %}
 const cssnano = require ('cssnano')
 const imagemin = require('gulp-imagemin')
 const pixrem = require('pixrem')
@@ -29,14 +26,6 @@ function pathsConfig(appName) {
   const vendorsRoot = 'node_modules'
 
   return {
-    {% if cookiecutter.custom_bootstrap_compilation == 'y' %}
-    bootstrapSass: `${vendorsRoot}/bootstrap/scss`,
-    vendorsJs: [
-      `${vendorsRoot}/jquery/dist/jquery.slim.js`,
-      `${vendorsRoot}/popper.js/dist/umd/popper.js`,
-      `${vendorsRoot}/bootstrap/dist/js/bootstrap.js`,
-    ],
-    {% endif %}
     app: this.app,
     templates: `${this.app}/templates`,
     css: `${this.app}/static/css`,
@@ -64,12 +53,9 @@ function styles() {
       cssnano({ preset: 'default' })   // minify result
   ]
 
-  return src(`${paths.sass}/project.scss`)
+  return src(`${paths.sass}/app.scss`)
     .pipe(sass({
       includePaths: [
-        {% if cookiecutter.custom_bootstrap_compilation == 'y' %}
-        paths.bootstrapSass,
-        {% endif %}
         paths.sass
       ]
     }).on('error', sass.logError))
@@ -83,25 +69,12 @@ function styles() {
 
 // Javascript minification
 function scripts() {
-  return src(`${paths.js}/project.js`)
+  return src(`${paths.js}/app.js`)
     .pipe(plumber()) // Checks for errors
     .pipe(uglify()) // Minifies the js
     .pipe(rename({ suffix: '.min' }))
     .pipe(dest(paths.js))
 }
-
-{% if cookiecutter.custom_bootstrap_compilation == 'y' %}
-// Vendor Javascript minification
-function vendorScripts() {
-  return src(paths.vendorsJs)
-    .pipe(concat('vendors.js'))
-    .pipe(dest(paths.js))
-    .pipe(plumber()) // Checks for errors
-    .pipe(uglify()) // Minifies the js
-    .pipe(rename({ suffix: '.min' }))
-    .pipe(dest(paths.js))
-}
-{% endif %}
 
 // Image compression
 function imgCompression() {
@@ -159,7 +132,6 @@ function watchPaths() {
 const generateAssets = parallel(
   styles,
   scripts,
-  {% if cookiecutter.custom_bootstrap_compilation == 'y' %}vendorScripts,{% endif %}
   imgCompression
 )
 
